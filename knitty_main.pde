@@ -102,7 +102,6 @@ void setup() {
   // to load successfully
   
  loadPatternImage(patternImageName);
- 
    
  
   displayButtonsGUI(); //GUI tab
