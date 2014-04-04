@@ -21,6 +21,11 @@ void handleButtonEvents(GButton button, GEvent event) {
     
     if (GUIlocked == false) {  //Lock Gui when knitting
             
+            
+            if (button == btnConnectArduino)
+               initSerialCommunication();
+                        
+            
             if (button == btnSetWorkingWidth){
               
                 if (int(txtfieldWorkingWidth.getText()) > 0 &&  int(txtfieldWorkingWidth.getText()) < totalWidth+1){

@@ -3,7 +3,7 @@
 import processing.serial.*;
 
 // The serial port:
-Serial serialCommunication;
+Serial serialCommunication = null;
 
 // Receive commands
 final char COM_CMD_PATTERN = 'P';
@@ -64,7 +64,7 @@ void executeCommand(char cmd, String payload) {
 
 void sendCommand(char cmd, String payload) {
   
-  if(serialCommunicationStarted == 0) {
+  if(serialCommunication == null || serialCommunicationStarted == 0) {
     return;
   }
   
@@ -82,7 +82,7 @@ void initSerialCommunication() {
 
 void parserSerialStream() {
 
-  if (serialCommunication.available() == 0) {
+  if (serialCommunication == null || serialCommunication.available() == 0) {
     return;
   }
 

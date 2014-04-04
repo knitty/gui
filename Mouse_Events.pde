@@ -23,7 +23,7 @@ void mouseDragged() {
     movePatternX = mousePatternStartX + mouseOffsetX/(scalingfactor);
     movePatternY = mousePatternStartY + mouseOffsetY/(scalingfactor);
    }
-  // println(mouseOffsetX/6 + " " + mouseOffsetY/6 + " - " + mouseX + " " + mouseY);
+  
 }
 }
 void mouseReleased() {

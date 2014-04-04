@@ -1,5 +1,6 @@
-import g4p_controls.*;
-import sojamo.drop.*;    //drop files
+// Don't forget to place the libraries under sketchbook/libraries/G4P and sketchbook/libraries/sDrop
+import g4p_controls.*;    // http://sourceforge.net/projects/g4p/
+import sojamo.drop.*;    //  http://www.sojamo.de/libraries/drop/
 
 
 PImage patternImage;  // Declare PImage
@@ -7,7 +8,7 @@ PImage patternImageWorkingSet;
 String myPattern = "";
 
 int totalWidth = 180; //all needles
-int workingWidth = 40; // number of working needles
+int workingWidth = 80; // number of working needles
 int scalingfactor = 6; //display one pixel x scalingfactor
 int rows = 120;
 int columns = 180;
@@ -18,12 +19,7 @@ int gridStartY = 60;
 boolean  knittigInProgress = false;
 boolean  SetBorderToggle = false;
 
-String patternImageName = "EGYPT_A.gif";
-//  backspace_text_11_punkt.gif
-// spaceinvader_01
-// TestPattern_60px
-// TestPattern_1x60px
-
+String patternImageName = "backspace_text.gif";
 
 int movePatternX = 0;
 int movePatternY = 0;
@@ -79,7 +75,9 @@ GButton  btnOpenPatterImageFile,
          btnPatternGridGapXminus, 
          btnSetWorkingWidth,
          btnSetCursor,
-         btnSetBorder;
+         btnSetBorder,
+         btnConnectArduino;
+       
 
 GLabel  btnPatternScaleText,
         btnPatternText,
@@ -101,12 +99,12 @@ void setup() {
   // The image file must be in the data folder of the current sketch 
   // to load successfully
   
- loadPatternImage(patternImageName);
+  loadPatternImage(patternImageName);
    
  
   displayButtonsGUI(); //GUI tab
      
-  initSerialCommunication();
+  
   
   drop = new SDrop(this);
 }
@@ -121,18 +119,6 @@ void draw() {
   drawPattern();
   drawGrid();
   
-    //loadPixels();
-    //print(hex(pixels[(((gridStartY+displayWorkingRow*scalingfactor)+scalingfactor/2)*width) + ((gridStartX+(totalWidth/2-workingWidth/2)*scalingfactor)+scalingfactor/2)])  + " ");
-    
-    //Farbe im ersten linken rechteck der workingRow
-    //loadPixels();
-    //hex(pixels[(((gridStartY+displayWorkingRow*scalingfactor)+scalingfactor/2)*width) + ((gridStartX+(totalWidth/2-workingWidth/2)*scalingfactor)+scalingfactor/2)])
-    
-    // rechteck am linken ende der workingRow
-    //fill(#FFCC00);
-    //rect(gridStartX+(totalWidth/2-workingWidth/2)*scalingfactor,gridStartY+displayWorkingRow*scalingfactor,6,6);
-    //rect(((gridStartX+(totalWidth/2-workingWidth/2)*scalingfactor)+scalingfactor/2),((gridStartY+displayWorkingRow*scalingfactor)+scalingfactor/2),6,6);
-    
 }
 
 void loadPatternImage(String patternImageName){

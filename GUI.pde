@@ -1,23 +1,28 @@
 void displayButtonsGUI(){
   
   // --------------------Buttons-------------------------
+  
+  
+// Connect Arduino
 
+    btnConnectArduino = new GButton(this, 10, gridStartY+5, 100, 20, "Connect Arduino");
+    btnConnectArduino.setLocalColorScheme(GP4colorScheme);
 
 // Open File
 
-    btnOpenPatterImageFile = new GButton(this, 10, gridStartY+5, 100, 20, "Open Image File");
+    btnOpenPatterImageFile = new GButton(this, 10, gridStartY+30, 100, 20, "Open Image File");
     btnOpenPatterImageFile.setLocalColorScheme(GP4colorScheme);
    
 // WorkingWidth
      
-   btnSetWorkingWidthText = new GLabel(this, 10,gridStartY+35 , 100, 20, "Working Width");
+   btnSetWorkingWidthText = new GLabel(this, 10,gridStartY+60 , 100, 20, "Working Width");
    btnSetWorkingWidthText.setTextAlign(GAlign.MIDDLE,GAlign.MIDDLE);  
    btnSetWorkingWidthText.setTextBold();
    
-   txtfieldWorkingWidth = new GTextField(this, 10, gridStartY+55, 30, 20);
+   txtfieldWorkingWidth = new GTextField(this, 10, gridStartY+85, 30, 20);
    txtfieldWorkingWidth.setText(str(workingWidth));
    
-   btnSetWorkingWidth = new GButton(this, 50, gridStartY+55, 40, 20, "Set");
+   btnSetWorkingWidth = new GButton(this, 50, gridStartY+85, 40, 20, "Set");
    btnSetWorkingWidth.setLocalColorScheme(GP4colorScheme);
 
   
