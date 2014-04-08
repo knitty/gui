@@ -4,29 +4,29 @@ void mousePressed() {
   if (mouseX > gridStartX && mouseY > gridStartY) {
     mouseStartX = mouseX;
     mouseStartY = mouseY;
-    
+
     mousePatternStartX = movePatternX;
     mousePatternStartY = movePatternY;
   }
   else {
-  mouseLocked = true;
+    mouseLocked = true;
   }
 }
 
 void mouseDragged() {
-  
+
   if (mouseLocked == false && GUIlocked == false){
-   if (mouseX > gridStartX && mouseY > gridStartY) {
-    mouseOffsetX = mouseX-mouseStartX; 
-    mouseOffsetY = mouseY-mouseStartY; 
-    
-    movePatternX = mousePatternStartX + mouseOffsetX/(scalingfactor);
-    movePatternY = mousePatternStartY + mouseOffsetY/(scalingfactor);
-   }
-  
-}
+    if (mouseX > gridStartX && mouseY > gridStartY) {
+      mouseOffsetX = mouseX-mouseStartX; 
+      mouseOffsetY = mouseY-mouseStartY; 
+
+      movePatternX = mousePatternStartX + mouseOffsetX/(scalingfactor);
+      movePatternY = mousePatternStartY + mouseOffsetY/(scalingfactor);
+    }
+
+  }
 }
 void mouseReleased() {
- mouseLocked = false;
+  mouseLocked = false;
 }
 
