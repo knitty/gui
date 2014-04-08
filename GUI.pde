@@ -2,7 +2,7 @@ void displayButtonsGUI(){
   
   // --------------------Buttons-------------------------
   
-  
+ 
 // Connect Arduino
 
     btnConnectArduino = new GButton(this, 10, gridStartY+5, 100, 20, "Connect Arduino");
@@ -29,7 +29,7 @@ void displayButtonsGUI(){
 // Scale Buttons
 
     int buttonsScaleGUIheightX = 10;
-    int buttonsScaleGUIheightY = gridStartY+180;
+    int buttonsScaleGUIheightY = gridStartY+130;
     
     btnPatternText = new GLabel(this, buttonsScaleGUIheightX, buttonsScaleGUIheightY-20, 100, 20, "Pattern");
     btnPatternText.setTextAlign(GAlign.MIDDLE,GAlign.MIDDLE);
@@ -54,7 +54,7 @@ void displayButtonsGUI(){
 // Pattern Grid
 
     int buttonsPatternGridheightX = 10;
-    int buttonsPatternGridGUIheightY = gridStartY+250;
+    int buttonsPatternGridGUIheightY = gridStartY+200;
 
     btnPatternGridText = new GLabel(this, buttonsPatternGridheightX, buttonsPatternGridGUIheightY, 45, 15, "Grid");
     btnPatternGridText.setTextAlign(GAlign.MIDDLE,GAlign.MIDDLE);
@@ -75,7 +75,7 @@ void displayButtonsGUI(){
 // Pattern Grid Gap
     
     int buttonsPatternGridGapheightX = 65;
-    int buttonsPatternGridGapGUIheightY = gridStartY+250;
+    int buttonsPatternGridGapGUIheightY = gridStartY+200;
 
     btnPatternGridGapText = new GLabel(this, buttonsPatternGridGapheightX, buttonsPatternGridGapGUIheightY, 45, 15, "Gap");
     btnPatternGridGapText.setTextAlign(GAlign.MIDDLE,GAlign.MIDDLE);
@@ -93,20 +93,34 @@ void displayButtonsGUI(){
     btnPatternGridGapYminus.setLocalColorScheme(GP4colorScheme);   
 
 
-// Set Border
-    btnSetBorder = new GButton(this, 10, 430, 90, 20, "Set Border");
-    btnSetBorder.setLocalColorScheme(GP4colorScheme);     
+
+    int btnPatternButtonsHeightX = 10;
+    int btnPatternButtonsHeightY = gridStartY+280;
+
 
 // Mirror Pattern
-    btnPatternImageMirror = new GButton(this, 10, 400, 90, 20, "Mirror Pattern");
-    //btnPatternImageMirror.tag = "Mirror Pattern"
+    btnPatternImageMirror = new GButton(this, btnPatternButtonsHeightX, btnPatternButtonsHeightY, 90, 20, "Mirror Pattern");
     btnPatternImageMirror.setLocalColorScheme(GP4colorScheme);
+    
+ // Mirror Pattern
+    btnMirrorPatternArray1 = new GButton(this, btnPatternButtonsHeightX, btnPatternButtonsHeightY+25, 90, 20, "Mirror Array 1");
+    btnMirrorPatternArray1.setLocalColorScheme(GP4colorScheme);  
+    
+ // Mirror Pattern
+    btnMirrorPatternArray2 = new GButton(this, btnPatternButtonsHeightX, btnPatternButtonsHeightY+50, 90, 20, "Mirror Array 2");
+    btnMirrorPatternArray2.setLocalColorScheme(GP4colorScheme);   
+    
+// Set Border
+    btnSetBorder = new GButton(this, btnPatternButtonsHeightX, btnPatternButtonsHeightY+75, 90, 20, "Set Border");
+    btnSetBorder.setLocalColorScheme(GP4colorScheme);     
+
+
 
 
 // Cursor    
 
     int btnSetCursorTextHeightX = 10;
-    int btnSetCursorTextHeightY = gridStartY+420;
+    int btnSetCursorTextHeightY = gridStartY+400;
 
     btnSetCursorText = new GLabel(this, btnSetCursorTextHeightX, btnSetCursorTextHeightY, 100, 20, "Set Cursor");
     btnSetCursorText.setTextAlign(GAlign.MIDDLE,GAlign.MIDDLE);
@@ -124,14 +138,15 @@ void displayButtonsGUI(){
     btnOneRowBack = new GButton(this, 10, 550, 100, 20, "One Row Back");
     btnOneRowBack.setLocalColorScheme(GP4colorScheme);
     
-    btnKnitOneRow = new GButton(this, 10, 580, 100, 20, "Knit One Row");
-    btnKnitOneRow.setLocalColorScheme(GP4colorScheme);
+  //  btnKnitOneRow = new GButton(this, 10, 580, 100, 20, "Knit One Row");
+   // btnKnitOneRow.setLocalColorScheme(GP4colorScheme);
 
  // knit Invers
  
-    btnKnitInvers = new GButton(this, 10, 610, 100, 20, "Knit Invers");
-    btnKnitInvers.setLocalColorScheme(GP4colorScheme);
- 
+    //btnKnitInvers = new GButton(this, 10, 610, 100, 20, "Knit Invers");
+    //btnKnitInvers.setLocalColorScheme(GP4colorScheme);
+
+
   // Start Knit
  
     btnKnitStart = new GButton(this, 10, 640, 100, 20, "Start Knit");
@@ -145,7 +160,7 @@ void displayButtonsGUI(){
 
 // Infobox
 
-txaInformationBox = new GTextArea(this, 1000, 0, 200, gridStartY, G4P.SCROLLBARS_VERTICAL_ONLY  | G4P.SCROLLBARS_AUTOHIDE);
+txaInformationBox = new GTextArea(this, 900, 0, 300, gridStartY, G4P.SCROLLBARS_VERTICAL_ONLY  | G4P.SCROLLBARS_AUTOHIDE);
 txaInformationBox.setLocalColorScheme(GP4colorScheme);
 
 

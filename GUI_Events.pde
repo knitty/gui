@@ -24,7 +24,10 @@ void handleButtonEvents(GButton button, GEvent event) {
             
             if (button == btnConnectArduino)
                initSerialCommunication();
-                        
+                    
+            if (button == btnOpenPatterImageFile)
+               loadPatternImageFile();
+           
             
             if (button == btnSetWorkingWidth){
               
@@ -32,12 +35,7 @@ void handleButtonEvents(GButton button, GEvent event) {
                        workingWidth = int(txtfieldWorkingWidth.getText()); 
                 }
                }
-            if (button == btnOpenPatterImageFile)
-               loadPatternImageFile();
-           
-            if (button == btnPatternImageMirror)
-              mirrorPatternImageX();
-            
+          
         
           //scale      
              if (button == btnPatternScaleYplus)
@@ -99,7 +97,37 @@ void handleButtonEvents(GButton button, GEvent event) {
                   if (patternGridYgap==-1) {
                     patternGridYgap=0;
                   }
-               }       
+               } 
+               
+               
+          // Mirror Pattern
+            if (button == btnPatternImageMirror)
+              mirrorPatternImageX();    
+                       
+              
+          // Mirror Array
+              if (button == btnMirrorPatternArray1){
+                if (mirrorPatternArray2 == false){
+                    mirrorPatternArray1 = !mirrorPatternArray1;
+                }
+               
+                mirrorPatternArray2 = false;
+              }                 
+             
+              if (button == btnMirrorPatternArray2){
+                mirrorPatternArray2 = !mirrorPatternArray2;
+                mirrorPatternArray1 = mirrorPatternArray2;
+              }    
+                          
+              
+              
+         // Set Border
+              if (button == btnSetBorder){
+                SetBorderToggle = !SetBorderToggle;
+              }  
+              
+              
+               
           // Set Cursor     
                   if (button == btnSetCursor){
                      //println(int(txtfieldSetCursor.getText()));
@@ -107,32 +135,31 @@ void handleButtonEvents(GButton button, GEvent event) {
                      txaInformationBox.appendText("Cursor Set");
                   }
         
-         // Set Border
-        
-                  if (button == btnSetBorder){
-                      SetBorderToggle = !SetBorderToggle;
-                  
-                  }
+  
                   
             if (button == btnKnitInvers)
               inversePatternImage();
-        
-            if (button == btnOneRowBack)
-               movePatternY--;
-        
+                
             if (button == btnKnitOneRow)
-               buttonKnitRow();
-               
+               buttonKnitRow(0);
+            
     }        
-       
-       
-       
+   
+   // GUI locked End   
+    
+    if (button == btnOneRowBack){
+               movePatternY--;  
+               buttonKnitRow(1);  // offset to load correct pattern
+    }
+               
+               
     if (button == btnKnitStart){
        GUIlocked = true;
        knittigInProgress = true;
-       buttonKnitRow();
+       buttonKnitRow(0);
        btnKnitStart.setLocalColorScheme(GP4colorSchemeActive);
        btnKnitPause.setLocalColorScheme(GP4colorScheme);
+       
       }
       
     if (button == btnKnitPause){
@@ -142,7 +169,8 @@ void handleButtonEvents(GButton button, GEvent event) {
        btnKnitPause.setLocalColorScheme(GP4colorSchemeActive);
        //erase last row
        sendCommand(COM_CMD_PATTERN, "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
-      }
+    
+    }
       
 
   
@@ -153,7 +181,7 @@ void handleButtonEvents(GButton button, GEvent event) {
 }
 
 
-void buttonKnitRow() {
+void buttonKnitRow(int offset) {
 
      if (knittigInProgress == true){
        
@@ -165,7 +193,7 @@ void buttonKnitRow() {
           // println(hex(pixels[(((gridStartY+displayWorkingRow*scalingfactor)+scalingfactor/2)*width) + ((gridStartX+(totalWidth/2-workingWidth/2)*scalingfactor)+scalingfactor/2)]) );
           for (int i = 0; i < workingWidth; i++)
           {
-            if ((pixels[(((gridStartY+displayWorkingRow*scalingfactor)+scalingfactor/2)*width) + ((gridStartX+(totalWidth/2-workingWidth/2)*scalingfactor)+scalingfactor/2) + i*scalingfactor] ) == 0xFF000000)
+            if ((pixels[(((gridStartY+displayWorkingRow*scalingfactor)+scalingfactor/2+offset*scalingfactor)*width) + ((gridStartX+(totalWidth/2-workingWidth/2)*scalingfactor)+scalingfactor/2) + i*scalingfactor] ) == 0xFF000000)
             {
               myPattern += "1";
             }

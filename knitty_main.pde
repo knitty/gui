@@ -2,24 +2,26 @@
 import g4p_controls.*;    // http://sourceforge.net/projects/g4p/
 import sojamo.drop.*;    //  http://www.sojamo.de/libraries/drop/
 
-
+PImage knittyLogoImage;
 PImage patternImage;  // Declare PImage
 PImage patternImageWorkingSet;
 String myPattern = "";
 
 int totalWidth = 180; //all needles
-int workingWidth = 80; // number of working needles
+int workingWidth = 100; // number of working needles
 int scalingfactor = 6; //display one pixel x scalingfactor
 int rows = 120;
 int columns = 180;
 int displayWorkingRow = 90;
 int gridStartX = 114;
-int gridStartY = 60;
+int gridStartY = 90;
 
 boolean  knittigInProgress = false;
 boolean  SetBorderToggle = false;
 
-String patternImageName = "backspace_text.gif";
+String patternImageName = "spaceinvader_03.gif";
+//backspace_text
+
 
 int movePatternX = 0;
 int movePatternY = 0;
@@ -32,6 +34,8 @@ int patternGridY = 1;
 int patternGridXgap = 0;
 int patternGridYgap = 0;
 
+boolean mirrorPatternArray1 = false;
+boolean mirrorPatternArray2 = false;
 
 int backgroundColour = 240;
 int headerColour = 240;
@@ -40,7 +44,7 @@ int displayWorkingRowColour = 170;
 int blackColour = 0;
 
 int GP4colorScheme = 6;
-int GP4colorSchemeActive = 1;
+int GP4colorSchemeActive = 0;
 
 
 int mouseOffsetX = 0; 
@@ -76,7 +80,9 @@ GButton  btnOpenPatterImageFile,
          btnSetWorkingWidth,
          btnSetCursor,
          btnSetBorder,
-         btnConnectArduino;
+         btnConnectArduino,
+         btnMirrorPatternArray1,
+         btnMirrorPatternArray2;
        
 
 GLabel  btnPatternScaleText,
@@ -100,10 +106,12 @@ void setup() {
   // to load successfully
   
   loadPatternImage(patternImageName);
-   
+  
+  //load Logo
+  knittyLogoImage = loadImage("knitty_logo_80px.gif"); 
  
   displayButtonsGUI(); //GUI tab
-     
+ 
   
   
   drop = new SDrop(this);
@@ -114,10 +122,19 @@ void draw() {
   parserSerialStream();
   
   background(backgroundColour);
+   
   
   drawWorkingArea();
   drawPattern();
   drawGrid();
+  
+       //clear when knitting
+   if (GUIlocked == true) {
+         // clear header
+    fill(blackColour);
+    rect(0,gridStartY,gridStartX,height);
+   
+   } 
   
 }
 
@@ -137,7 +154,7 @@ void loadPatternImage(String patternImageName){
 
 
 void drawPattern(){ 
-     for( int i=0; i < patternGridX; i++ ){
+  /*   for( int i=0; i < patternGridX; i++ ){
       for(int j=0; j < patternGridY; j++){
      
           pushMatrix();
@@ -147,11 +164,57 @@ void drawPattern(){
           popMatrix();
       }
      }
- // pushMatrix();
-  //translate(movePatternX*scalingfactor-patternImage.width*scalingfactor,movePatternY*scalingfactor);
-  //image(patternImage, gridStartX+(totalWidth-patternImage.width)*scalingfactor, gridStartY+(displayWorkingRow-patternImage.height)*scalingfactor, patternImage.width*scalingfactor*patternScaleX, patternImage.height*scalingfactor*patternScaleY);
-  //noSmooth();
-  //popMatrix();
+*/  
+
+   
+      for(int j=0; j < patternGridY; j++){
+            for( int i=0; i < patternGridX; i++ ){ 
+          
+         //mirror pattern in array
+            if(mirrorPatternArray1 == true) {  
+                 if(i % 2 == 0) {
+                       if(j % 2 == 0) {
+                         mirrorPatternImageX();
+                       }
+                       if(j % 2 != 0 && mirrorPatternArray2 == true) {
+                         mirrorPatternImageX();
+                       }
+                       
+                 } else {
+                       if(j % 2 != 0 && mirrorPatternArray2 == false) {
+                          mirrorPatternImageX();
+                       }
+                 }
+            }
+                      
+        //place pattern in array
+          pushMatrix();
+          translate((movePatternX+i*patternGridXgap)*scalingfactor+((i*patternImage.width*scalingfactor+scalingfactor)*patternScaleX),((movePatternY-j*patternGridYgap)*scalingfactor-((j*patternImage.height*scalingfactor+scalingfactor)*patternScaleY)));
+          image(patternImage, gridStartX+(totalWidth/2-patternImage.width/2+1)*scalingfactor, gridStartY+(displayWorkingRow-patternImage.height+2)*scalingfactor, patternImage.width*scalingfactor*patternScaleX, patternImage.height*scalingfactor*patternScaleY);
+          noSmooth();
+          popMatrix();
+          
+          //demirror pattern in array
+            if(mirrorPatternArray1 == true) {  
+                 if(i % 2 == 0) {
+                       if(j % 2 == 0) {
+                         mirrorPatternImageX();
+                       }
+                       if(j % 2 != 0 && mirrorPatternArray2 == true) {
+                         mirrorPatternImageX();
+                       }
+                       
+                 } else {
+                       if(j % 2 != 0 && mirrorPatternArray2 == false) {
+                          mirrorPatternImageX();
+                       }
+                 }
+            }
+
+
+
+      }
+     }
   
 }
 
@@ -189,12 +252,13 @@ void drawGrid() {
     translate (gridStartX+((totalWidth/2-workingWidth/2)+workingWidth)*scalingfactor,gridStartY);
     fill(backgroundColour);
    // rect(0,0,gridStartX,rows*scalingfactor);
-    rect(0,0,gridStartX+(totalWidth/2-workingWidth/2)*scalingfactor,rows*scalingfactor);
+    rect(0,0,(totalWidth/2-workingWidth/2+10)*scalingfactor,rows*scalingfactor);
     popMatrix();
 
     // clear header
     fill(headerColour);
     rect(0,0,width,gridStartY);
+
 
     //Draw Border
     if (SetBorderToggle == true){
@@ -223,7 +287,7 @@ void drawGrid() {
 
     //draw displayWorkingRow right
     pushMatrix();
-    translate (gridStartX+(totalWidth/2+workingWidth/2)*scalingfactor,gridStartY+displayWorkingRow*scalingfactor);
+    translate (gridStartX+((totalWidth/2-workingWidth/2)+workingWidth)*scalingfactor,gridStartY+displayWorkingRow*scalingfactor);
     fill(displayWorkingRowColour);
     //rect(0,0,totalWidth*scalingfactor,scalingfactor);
     rect(0,0,(totalWidth/2-workingWidth/2)*scalingfactor,scalingfactor);
@@ -243,7 +307,11 @@ void drawGrid() {
     }
     popMatrix();
     
+      //draw Logo
+   image(knittyLogoImage,5,5,knittyLogoImage.width,knittyLogoImage.height);
+   
 
+   
 }
 
 

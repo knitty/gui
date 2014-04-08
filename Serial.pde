@@ -55,7 +55,7 @@ void executeCommand(char cmd, String payload) {
       break;
       
     case COM_CMD_PATTERN_END:
-      buttonKnitRow();
+      buttonKnitRow(0);
       println("Pattern end");
       break;
       
