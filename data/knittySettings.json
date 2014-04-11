@@ -1,0 +1,13 @@
+{
+  "patternGridX": 1,
+  "patternGridY": 1,
+  "workingWidth": 80,
+  "patternImageName": "backspace_text.gif",
+  "patternScaleX": 1,
+  "patternGridYgap": 2,
+  "patternScaleY": 1,
+  "movePatternY": 0,
+  "patternGridXgap": 1,
+  "SetBorderToggle": false,
+  "movePatternX": -2
+}
