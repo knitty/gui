@@ -116,8 +116,6 @@ void parserSerialStream() {
             // Everything is read, execute command
             executeCommand(parserReceivedCommand, parserReceivedPayload);
             parserState = COM_PARSE_CMD;
-
-            sendCommand(COM_CMD_RESPONSE, "OK");
             break;
         }
 
