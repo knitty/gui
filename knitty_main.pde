@@ -19,7 +19,7 @@ int gridStartY = 90;
 boolean  knittigInProgress = false;
 boolean  SetBorderToggle = false;
 
-String patternImageName = "spaceinvader_03.gif";
+String patternImageName = "backspace_text.gif";
 //backspace_text
 
 
