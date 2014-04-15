@@ -203,7 +203,7 @@ void buttonKnitRow(int offset) {
 
         // println(hex(pixels[(((gridStartY+displayWorkingRow*scalingfactor)+scalingfactor/2)*width) + ((gridStartX+(totalWidth/2-workingWidth/2)*scalingfactor)+scalingfactor/2)]) );
         for (int i = 0; i < workingWidth; i++) {
-            if ((pixels[(((gridStartY+displayWorkingRow*scalingfactor)+scalingfactor/2+offset*scalingfactor)*width) + ((gridStartX+(totalWidth/2-workingWidth/2)*scalingfactor)+scalingfactor/2) + i*scalingfactor] ) == 0xFF000000) {
+            if (((pixels[(((gridStartY+displayWorkingRow*scalingfactor)+scalingfactor/2+offset*scalingfactor)*width) + ((gridStartX+(totalWidth/2-workingWidth/2)*scalingfactor)+scalingfactor/2) + i*scalingfactor] ) & 0x00FFFFFF) == 0x000000) {
                 myPattern += "1";
             } else {
                 myPattern += "0";
