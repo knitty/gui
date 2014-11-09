@@ -357,6 +357,7 @@ void startKinittingButtonKeyboard() {
     buttonKnitRow(0);
     break;
 
+<<<<<<< HEAD
   case 2: 
   case 3://Passap, Frankenpassap
 
@@ -391,6 +392,16 @@ void pauseKinittingButtonKeyboard() {
 
   disableServos();
 }
+=======
+        // println(hex(pixels[(((gridStartY+displayWorkingRow*scalingfactor)+scalingfactor/2)*width) + ((gridStartX+(totalWidth/2-workingWidth/2)*scalingfactor)+scalingfactor/2)]) );
+        for (int i = 0; i < workingWidth; i++) {
+            if (((pixels[(((gridStartY+displayWorkingRow*scalingfactor)+scalingfactor/2+offset*scalingfactor)*width) + ((gridStartX+(totalWidth/2-workingWidth/2)*scalingfactor)+scalingfactor/2) + i*scalingfactor] ) & 0x00FFFFFF) == 0x000000) {
+                myPattern += "1";
+            } else {
+                myPattern += "0";
+            }
+        }
+>>>>>>> 5b7755fc03fcae087406194e78801df09c6f081e
 
 void buttonKnitRow(int offset) {
 
