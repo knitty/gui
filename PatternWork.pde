@@ -168,8 +168,8 @@ boolean createColourPalette() {
 
     //if the color hasn't been added to the array
     if (colorExists == false) {
-      //stop if more than 4 colours
-      if (patternImageColorList.length >= 4) {
+      //stop if more than 4 colours for passap or more than 2 for superba
+      if (patternImageColorList.length >= 4 || (patternImageColorList.length >= 2 && knittingMachine ==1)) {
         InfoText = ("WARNING: The picture has more then 4 Colours!!\nIt will not be knitted properly.");
 
         println("WARNING: The picture has more then 4 Colours!! It will not be knitted properly.");
@@ -203,6 +203,13 @@ boolean createColourPaletteBack() {
 
     //if the color hasn't been added to the array
     if (colorExists == false) {
+      //stop if more than 4 colours
+      if (patternImageColorListBack.length >= 4) {
+        InfoText = ("WARNING: The picture has more then 4 Colours!!\nIt will not be knitted properly.");
+
+        println("WARNING: The picture has more then 4 Colours!! It will not be knitted properly.");
+        return false;
+      }
       patternImageColorListBack = (int[])append(patternImageColorListBack, patternImageBack.pixels[i]); //add it
     }
   }
