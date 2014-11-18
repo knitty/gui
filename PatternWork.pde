@@ -1,4 +1,4 @@
-void loadPatternImage(String filename) {
+boolean loadPatternImage(String filename) {
 
   println(filename);
   patternImageName = filename;
@@ -16,22 +16,24 @@ void loadPatternImage(String filename) {
 
 
   // show colour palette of the pattern in serial window
-  if (createColourPalette()) {
+  if (createColourPalette()==true) {
     for (int k=0; k<patternImageColorList.length; k++ ) {
       println("Color"+ k +": " + patternImageColorList[k]); //prints the colors (you'll notice that the values are not in rgb format)
+      coloursInUse = patternImageColorList.length;
     }
-    //to do warning if more than 4 colours
-    coloursInUse = patternImageColorList.length;
+  } else {
+    //warning if more than 4 colours
+    return false;
   }
-
   //change background to transparent and mirror image if it is a superba
   if (knittingMachine ==1) {
     // makePatternImageTransparent(); 
     mirrorPatternImageX();
   }
+  return true;
 }
 
-void loadPatternImageBack(String filename) {
+boolean loadPatternImageBack(String filename) {
 
   println(filename);
   patternImageNameBack = filename;
@@ -47,7 +49,11 @@ void loadPatternImageBack(String filename) {
     }
     //to do warning if more than 4 colours
     coloursInUseBack = patternImageColorListBack.length;
+  } else {
+    //warning if more than 4 colours
+    return false;
   }
+  return true;
 }
 
 void makePatternImageTransparent() {
@@ -162,6 +168,13 @@ boolean createColourPalette() {
 
     //if the color hasn't been added to the array
     if (colorExists == false) {
+      //stop if more than 4 colours
+      if (patternImageColorList.length >= 4) {
+        InfoText = ("WARNING: The picture has more then 4 Colours!!\nIt will not be knitted properly.");
+
+        println("WARNING: The picture has more then 4 Colours!! It will not be knitted properly.");
+        return false;
+      }
       patternImageColorList = (int[])append(patternImageColorList, patternImage.pixels[i]); //add it
     }
   }

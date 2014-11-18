@@ -72,11 +72,6 @@ int SetBorderToggleColor = 1;
 String patternImageName = "backspace_text.gif";
 String patternImageNameBack = "backspace_text.gif";
 
-<<<<<<< HEAD
-=======
-String patternImageName = "backspace_text.gif";
-//backspace_text
->>>>>>> 5b7755fc03fcae087406194e78801df09c6f081e
 
 //for fileoperation (json)
 String patternFilename;

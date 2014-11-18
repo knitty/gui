@@ -16,11 +16,17 @@ void dropEvent(DropEvent theDropEvent) {
       if (isValidImageFile(dropName)) {
 
         if (switchBedState==false) {
-          loadPatternImage(dropName);
+          //load default if too much colours
+          if (loadPatternImage(dropName)==false) {
+            loadPatternImage("toMuchColours.gif");
+          }
           movePatternX = 0 + workingWidthOffset;
           movePatternY = 0;
         } else {
-          loadPatternImageBack(dropName);
+          //load default if too much colours
+          if (loadPatternImageBack(dropName)==false) {
+            loadPatternImageBack("toMuchColours.gif");
+          }
           movePatternBackX = 0 + workingWidthOffset;
           movePatternBackY = 0;
         }
@@ -53,7 +59,9 @@ void fileSelected(File selection) {
 
   String loadFileName = selection.getAbsolutePath();
   if (isValidImageFile(loadFileName)) {
-    loadPatternImage(loadFileName);
+    if (loadPatternImage(loadFileName)==false) {
+      loadPatternImage("toMuchColours.gif");
+    }
     movePatternX = 0 + workingWidthOffset;
     movePatternY = 0;
     InfoText = (patternImageName + "\nPattern loaded");
@@ -215,6 +223,4 @@ void  saveBasicKnittySettings() {
   saveKnittySettingsFile();
   //println("Save Settings");
 }
-
-
 
