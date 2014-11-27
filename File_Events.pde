@@ -213,7 +213,7 @@ void saveKnittySettingsFile() {
   knittySettings.setInt("serialport", serialport);  
   knittySettings.setBoolean("FrankenpassapBackInvers", FrankenpassapBackInvers);  
   saveJSONObject(knittySettings, knittySettingsName);
-  InfoText = (knittySettingsName + "\nSettings saved");
+  //InfoText = (knittySettingsName + "\nSettings saved");
 
   fileOperationInProgress = false;
 }

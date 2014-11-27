@@ -80,6 +80,7 @@ void handleButtonEvents(GButton button, GEvent event) {
         //scale
         if (button == btnPatternScaleYplus) {
           patternScaleY++;
+          InfoText = ("Scale Y: " + patternScaleY);
         }
 
         if (button == btnPatternScaleYminus) {
@@ -87,10 +88,12 @@ void handleButtonEvents(GButton button, GEvent event) {
           if (patternScaleY==0) {
             patternScaleY=1;
           }
+          InfoText = ("Scale Y: " + patternScaleY);
         }
 
         if (button == btnPatternScaleXplus) {
           patternScaleX++;
+          InfoText = ("Scale X: " + patternScaleX);
         }
 
         if (button == btnPatternScaleXminus) {
@@ -98,11 +101,13 @@ void handleButtonEvents(GButton button, GEvent event) {
           if (patternScaleX==0) {
             patternScaleX=1;
           }
+          InfoText = ("Scale X: " + patternScaleX);
         }
 
         // Pattern Grid
         if (button == btnPatternGridXplus) {
           patternGridX++;
+          InfoText = ("PatternGrid X: " + patternGridX);
         }
 
         if (button == btnPatternGridXminus) {
@@ -110,9 +115,11 @@ void handleButtonEvents(GButton button, GEvent event) {
           if (patternGridX==0) {
             patternGridX=1;
           }
+          InfoText = ("PatternGrid X: " + patternGridX);
         }
         if (button == btnPatternGridYplus) {
           patternGridY++;
+          InfoText = ("PatternGrid Y: " + patternGridY);
         }
 
         if (button == btnPatternGridYminus) {
@@ -120,11 +127,13 @@ void handleButtonEvents(GButton button, GEvent event) {
           if (patternGridY==0) {
             patternGridY=1;
           }
+          InfoText = ("PatternGrid Y: " + patternGridY);
         }
 
         // Pattern Grid Gap
         if (button == btnPatternGridGapXplus) {
           patternGridXgap++;
+          InfoText = ("PatternGridGap X: " + patternGridXgap);
         }
 
         if (button == btnPatternGridGapXminus) {
@@ -132,10 +141,12 @@ void handleButtonEvents(GButton button, GEvent event) {
           if (patternGridXgap==-1) {
             patternGridXgap=0;
           }
+          InfoText = ("PatternGridGap X: " + patternGridXgap);
         }
 
         if (button == btnPatternGridGapYplus) {
           patternGridYgap++;
+          InfoText = ("PatternGridGap Y: " + patternGridYgap);
         }
 
         if (button == btnPatternGridGapYminus) {
@@ -143,6 +154,7 @@ void handleButtonEvents(GButton button, GEvent event) {
           if (patternGridYgap==-1) {
             patternGridYgap=0;
           }
+          InfoText = ("PatternGridGap Y: " + patternGridYgap);
         }
 
 
